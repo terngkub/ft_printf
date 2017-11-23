@@ -6,7 +6,7 @@
 #    By: nkamolba <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 09:11:21 by nkamolba          #+#    #+#              #
-#    Updated: 2017/11/23 13:21:41 by terng            ###   ########.fr        #
+#    Updated: 2017/11/23 13:24:24 by terng            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,7 @@ FILES =	ft_memset ft_bzero ft_memcpy ft_memccpy ft_memmove ft_memchr ft_memcmp\
 		ft_lstnew ft_lstdelone ft_lstdel ft_lstadd ft_lstiter ft_lstmap\
 		ft_lstpushback ft_lstprint ft_lstsearch ft_lstrev
 		
-LIBO = $(addsuffix .o, $(FILES))
-
-
+LIBO = $(addprefix libft/, $(addsuffix .o, $(FILES)))
 
 all : $(NAME)
 
