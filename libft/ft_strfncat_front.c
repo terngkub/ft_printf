@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strfncat_front.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkamolba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/17 10:38:51 by nkamolba          #+#    #+#             */
-/*   Updated: 2017/11/29 16:34:08 by nkamolba         ###   ########.fr       */
+/*   Created: 2017/11/27 18:13:23 by nkamolba          #+#    #+#             */
+/*   Updated: 2017/11/27 18:15:03 by nkamolba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+char	*ft_strfncat_front(char **str1, char *str2,
+			size_t len1, size_t len2)
 {
-	size_t		len;
-	va_list		ap;
-	char		*str;
+	char	*word;
+	size_t	i;
 
-	len = 0;
-	va_start(ap, format);
-	if (!(str = ft_readformat(format, ap, &len)))
-		return (-1);
-	va_end(ap);
-	ft_putstr_len(str, len);
-	free(str);
-	return (len);
+	if (!(word = ft_strnew(len1 + len2)))
+		return (NULL);
+	i = 0;
+	while (i < len2)
+	{
+		word[i] = str2[i];
+		i++;
+	}
+	while (i - len2 < len1)
+	{
+		word[i] = str1[0][i - len2];
+		i++;
+	}
+	free(*str1);
+	*str1 = word;
+	return (*str1);
 }

@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkamolba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/17 10:38:51 by nkamolba          #+#    #+#             */
-/*   Updated: 2017/11/29 16:34:08 by nkamolba         ###   ########.fr       */
+/*   Created: 2017/11/24 12:52:27 by nkamolba          #+#    #+#             */
+/*   Updated: 2017/11/24 12:52:39 by nkamolba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+char	*ft_itoa_base(size_t n, char *base)
 {
-	size_t		len;
-	va_list		ap;
-	char		*str;
+	int		base_len;
+	int		num_len;
+	size_t	tmp;
+	char	*str;
 
-	len = 0;
-	va_start(ap, format);
-	if (!(str = ft_readformat(format, ap, &len)))
-		return (-1);
-	va_end(ap);
-	ft_putstr_len(str, len);
-	free(str);
-	return (len);
+	base_len = ft_strlen(base);
+	num_len = 1;
+	tmp = n;
+	while (tmp /= base_len)
+		num_len++;
+	if (!(str = ft_strnew(num_len)))
+		return (NULL);
+	while (num_len--)
+	{
+		str[num_len] = base[n % base_len];
+		n /= base_len;
+	}
+	return (str);
 }

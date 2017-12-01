@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_len.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkamolba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/17 10:38:51 by nkamolba          #+#    #+#             */
-/*   Updated: 2017/11/29 16:34:08 by nkamolba         ###   ########.fr       */
+/*   Created: 2017/11/27 15:55:48 by nkamolba          #+#    #+#             */
+/*   Updated: 2017/11/27 17:38:03 by nkamolba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+void	ft_putstr_len(char *str, size_t len)
 {
-	size_t		len;
-	va_list		ap;
-	char		*str;
-
-	len = 0;
-	va_start(ap, format);
-	if (!(str = ft_readformat(format, ap, &len)))
-		return (-1);
-	va_end(ap);
-	ft_putstr_len(str, len);
-	free(str);
-	return (len);
+	while (len--)
+		write(1, str++, 1);
 }

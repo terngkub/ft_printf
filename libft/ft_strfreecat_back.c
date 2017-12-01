@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strfreecat_back.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkamolba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/17 10:38:51 by nkamolba          #+#    #+#             */
-/*   Updated: 2017/11/29 16:34:08 by nkamolba         ###   ########.fr       */
+/*   Created: 2017/11/24 12:55:39 by nkamolba          #+#    #+#             */
+/*   Updated: 2017/11/27 17:14:38 by nkamolba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+char	*ft_strfreecat_back(char **str1, char *str2)
 {
-	size_t		len;
-	va_list		ap;
-	char		*str;
+	char	*tmp;
 
-	len = 0;
-	va_start(ap, format);
-	if (!(str = ft_readformat(format, ap, &len)))
-		return (-1);
-	va_end(ap);
-	ft_putstr_len(str, len);
-	free(str);
-	return (len);
+	if (!(tmp = ft_strjoin(*str1, str2)))
+		return (NULL);
+	free(*str1);
+	*str1 = tmp;
+	return (*str1);
 }

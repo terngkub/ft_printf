@@ -6,17 +6,15 @@
 #    By: nkamolba <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 09:11:21 by nkamolba          #+#    #+#              #
-#    Updated: 2017/11/23 13:24:24 by terng            ###   ########.fr        #
+#    Updated: 2017/11/29 12:58:53 by nkamolba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-
 NAME = libftprintf.a
 
-SRC = ft_printf.c getconv.c printer.c
-SRCO = ${SRC:%.c=%.o}
+FLAG = -Wall -Wextra -Werror
 
-FILES =	ft_memset ft_bzero ft_memcpy ft_memccpy ft_memmove ft_memchr ft_memcmp\
+LIB =	ft_memset ft_bzero ft_memcpy ft_memccpy ft_memmove ft_memchr ft_memcmp\
 		ft_strlen ft_strdup ft_strcpy ft_strncpy\
 		ft_strcat ft_strncat ft_strlcat\
 		ft_strchr ft_strrchr ft_strstr ft_strnstr\
@@ -29,26 +27,33 @@ FILES =	ft_memset ft_bzero ft_memcpy ft_memccpy ft_memmove ft_memchr ft_memcmp\
 		ft_putchar ft_putstr ft_putendl ft_putnbr\
 		ft_putchar_fd ft_putstr_fd ft_putendl_fd ft_putnbr_fd\
 		ft_countword ft_wordlen ft_getword ft_skipc ft_skiptoc\
-		ft_numlen ft_power\
+		ft_numlen ft_power ft_itoa_base ft_strfreecat_back ft_strfreecat_front\
+		ft_putstr_len ft_strfncat_back ft_strfncat_front\
 		ft_lstnew ft_lstdelone ft_lstdel ft_lstadd ft_lstiter ft_lstmap\
 		ft_lstpushback ft_lstprint ft_lstsearch ft_lstrev
-		
-LIBO = $(addprefix libft/, $(addsuffix .o, $(FILES)))
+
+LIBO = $(addprefix libft/, $(addsuffix .o, $(LIB)))
+
+FILE = ft_printf read_input get_conv get_data get_num get_str get_wchar get_ptr\
+	   handle_flag handle_wp
+
+FILEC = $(addsuffix .c, $(FILE))
+FILEO = $(addsuffix .o, $(FILE))
 
 all : $(NAME)
 
 $(NAME) :
-	make -C libft/
-	gcc -Wall -Wextra -Werror $(SRC)
-	ar rc $(NAME) $(SRCO) $(LIBO)
+	make -C libft
+	gcc -Wall -Wextra -Werror -c $(FILEC)
+	ar rc $(NAME) $(LIBO) $(FILEO)
 	ranlib $(NAME)
 
 clean :
-	make clean -C libft/
-	rm -f $(SRCO) 
+	make clean -C libft
+	rm -f $(FILEO)
 
-fclean : 
-	make fclean -C libft/
+fclean : clean
+	make fclean -C libft
 	rm -f $(NAME)
 
 re : fclean all

@@ -6,26 +6,19 @@
 /*   By: nkamolba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 12:07:22 by nkamolba          #+#    #+#             */
-/*   Updated: 2017/11/09 12:18:05 by nkamolba         ###   ########.fr       */
+/*   Updated: 2017/11/24 15:29:59 by nkamolba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_numlen(int n)
+int		ft_numlen(long long int n)
 {
 	int len;
 
 	len = 0;
-	if (n == -2147483648)
-		return (11);
 	if (n == 0)
 		return (1);
-	if (n < 0)
-	{
-		len++;
-		n *= -1;
-	}
 	while (n)
 	{
 		len++;
